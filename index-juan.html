@@ -79,7 +79,7 @@
 
   <!-- Audio oculto -->
   <audio id="musica" loop>
-    <source src="audio.mp3" type="audio/mpeg">
+    <source src="cancion.mp3" type="audio/mpeg">
     Tu navegador no soporta audio.
   </audio>
 
@@ -90,7 +90,7 @@
       <div class="modal-buttons">
         <button class="yes" onclick="playAudio()">Sí</button>
         <button class="no" onclick="closeModal()">No</button>
-        <button class="later" onclick="remindLater()">Recordarme más tarde</button>
+
       </div>
     </div>
   </div>
@@ -108,14 +108,10 @@
       modal.style.display = "none";
     }
 
-    function remindLater() {
-      modal.style.display = "none";
-      setTimeout(() => {
-        modal.style.display = "flex";
-      }, 15000); // vuelve a mostrar el modal en 15 segundos
     }
   </script>
 
 </body>
 </html>
+
 
