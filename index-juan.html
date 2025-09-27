@@ -85,24 +85,27 @@
 
 
   <!-- Ventana emergente -->
-  <div class="overlay" id="aviso">
-    <div class="modal">
-      <p>¿Desea reproducir el audio de la invitación?</p>
-      <button class="btn-yes" onclick="playAudio()">Sí</button>
-      <button class="btn-no" onclick="closeAviso()">No</button>
-    </div>
-  </div>
-
   <script>
+    const modal = document.getElementById("audioModal");
+    const musica = document.getElementById("musica");
+
     function playAudio() {
-      document.getElementById("musica").play();
-      document.getElementById("aviso").style.display = "none";
+      musica.play();
+      modal.style.display = "none";
     }
-    function closeAviso() {
-      document.getElementById("aviso").style.display = "none";
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    function remindLater() {
+      modal.style.display = "none";
+      setTimeout(() => {
+        modal.style.display = "flex";
+      }, 30); // vuelve a mostrar el modal en 15 segundos
     }
   </script>
-
+  
 </body>
 </html>
 
