@@ -7,104 +7,112 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
       text-align: center;
+      font-family: Arial, sans-serif;
       background: #f7f7f7;
     }
-    embed {
+
+    img {
       width: 100%;
-      height: 95vh;
-      border: none;
+      max-width: 800px;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    /* Fondo semitransparente */
-    .overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    /* Ventana emergente */
+    /* Modal */
     .modal {
-      background: white;
-      padding: 20px 30px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      max-width: 350px;
-      text-align: center;
-      animation: fadeIn 0.3s ease;
+      display: flex;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      align-items: center;
+      justify-content: center;
     }
 
-    .modal p {
-      font-size: 18px;
-      color: #333;
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .modal-content h2 {
       margin-bottom: 20px;
     }
 
-    /* Botones */
-    .modal button {
-      margin: 5px;
+    .modal-buttons button {
+      margin: 10px;
       padding: 10px 20px;
       border: none;
       border-radius: 8px;
-      font-size: 16px;
       cursor: pointer;
+      font-size: 16px;
       transition: background 0.2s;
     }
-    .btn-yes {
-      background: #25D366;
-      color: white;
-    }
-    .btn-yes:hover {
-      background: #20b958;
-    }
-    .btn-no {
-      background: #ccc;
-      color: black;
-    }
-    .btn-no:hover {
-      background: #b3b3b3;
-    }
 
-    /* Animación */
+    .yes { background: #28a745; color: white; }
+    .yes:hover { background: #218838; }
+    .no { background: #dc3545; color: white; }
+    .no:hover { background: #c82333; }
+    .later { background: #ffc107; color: black; }
+    .later:hover { background: #e0a800; }
+
     @keyframes fadeIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
 <body>
 
-  <!-- PDF -->
-  <embed src="invitacion.pdf" type="application/pdf" />
+  <!-- Imagen de la invitación -->
+  <img src="invitacion.png" alt="Invitación">
 
   <!-- Audio oculto -->
   <audio id="musica" loop>
-    <source src="cancion.mp3" type="audio/mpeg">
+    <source src="audio.mp3" type="audio/mpeg">
     Tu navegador no soporta audio.
   </audio>
 
-  <!-- Ventana emergente -->
-  <div class="overlay" id="aviso">
-    <div class="modal">
-      <p>¿Desea reproducir el audio de la invitación?</p>
-      <button class="btn-yes" onclick="playAudio()">Sí</button>
-      <button class="btn-no" onclick="closeAviso()">No</button>
+  <!-- Modal -->
+  <div id="audioModal" class="modal">
+    <div class="modal-content">
+      <h2>¿Deseas reproducir música de fondo?</h2>
+      <div class="modal-buttons">
+        <button class="yes" onclick="playAudio()">Sí</button>
+        <button class="no" onclick="closeModal()">No</button>
+        <button class="later" onclick="remindLater()">Recordarme más tarde</button>
+      </div>
     </div>
   </div>
 
   <script>
+    const modal = document.getElementById("audioModal");
+    const musica = document.getElementById("musica");
+
     function playAudio() {
-      document.getElementById("musica").play();
-      document.getElementById("aviso").style.display = "none";
+      musica.play();
+      modal.style.display = "none";
     }
-    function closeAviso() {
-      document.getElementById("aviso").style.display = "none";
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    function remindLater() {
+      modal.style.display = "none";
+      setTimeout(() => {
+        modal.style.display = "flex";
+      }, 15000); // vuelve a mostrar el modal en 15 segundos
     }
   </script>
 
