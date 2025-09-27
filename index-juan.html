@@ -82,7 +82,17 @@
     <source src="cancion.mp3" type="audio/mpeg">
     Tu navegador no soporta audio.
   </audio>
-
+  <!-- Modal -->
+  <div id="audioModal" class="modal">
+    <div class="modal-content">
+      <h2>¿Deseas reproducir música de fondo?</h2>
+      <div class="modal-buttons">
+        <button class="yes" onclick="playAudio()">Sí</button>
+        <button class="no" onclick="closeModal()">No</button>
+        <button class="later" onclick="remindLater()">Recordarme más tarde</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Ventana emergente -->
   <script>
@@ -108,6 +118,7 @@
   
 </body>
 </html>
+
 
 
 
